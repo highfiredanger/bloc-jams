@@ -1,10 +1,5 @@
-var pointsArray = document.getElementsByClassName('point');
-
-function forEach(array){
+function forEach(array, callback){
     for (var i = 0; i < array.length; i++){
-        array[i];
-        // callback here, but what function? 
+        callback(array[i]);
     }
 }
-
-forEach(pointsArray);
