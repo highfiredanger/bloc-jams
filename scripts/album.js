@@ -1,4 +1,4 @@
- var albumPicasso = {
+var albumPicasso = {
      title: 'The Colors',
      artist: 'Pablo Picasso',
      label: 'Cubism',
@@ -12,8 +12,8 @@
          { title: 'Magenta', duration: '2:15'}
      ]
  };
-
-var albumMarconi = {
+ 
+ var albumMarconi = {
      title: 'The Telephone',
      artist: 'Guglielmo Marconi',
      label: 'EM',
@@ -28,7 +28,22 @@ var albumMarconi = {
      ]
  };
 
- var createSongRow = function(songNumber, songName, songLength) {
+ var albumModeselektor = {
+     title: 'Happy Birthday!',
+     artist: 'Modeselektor',
+     label: 'BPitch Control',
+     year: '2007',
+     albumArtUrl: 'assets/images/MHB.jpg',
+     songs: [
+         { title: 'Happy Birthday', duration: '1:01' },
+         { title: 'Godspeed', duration: '5:01' },
+         { title: '2000007', duration: '3:21'},
+         { title: 'Let Your Love Grow', duration: '3:14' },
+         { title: 'Em Ocean', duration: '2:15'}
+     ]
+ };
+
+var createSongRow = function(songNumber, songName, songLength) {
      var template =
         '<tr class="album-view-song-item">'
       + '  <td class="song-item-number">' + songNumber + '</td>'
@@ -51,14 +66,18 @@ var setCurrentAlbum = function(album) {
      albumArtist.firstChild.nodeValue = album.artist;
      albumReleaseInfo.firstChild.nodeValue = album.year + ' ' + album.label;
      albumImage.setAttribute('src', album.albumArtUrl);
- 
      albumSongList.innerHTML = '';
- 
      for (var i = 0; i < album.songs.length; i++) {
          albumSongList.innerHTML += createSongRow(i + 1, album.songs[i].title, album.songs[i].duration);
      }
  };
  
  window.onload = function() {
-     setCurrentAlbum(albumPicasso);
+     setCurrentAlbum(albumMarconi);
  };
+
+document.getElementsByClassName('album-cover-art')[0].onclick = function() {
+    var arr = [albumModeselektor, albumMarconi, albumPicasso]
+    for (var i = 0; i < arr.length; i++)
+        setCurrentAlbum(arr[i]);
+}
