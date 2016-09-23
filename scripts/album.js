@@ -72,7 +72,7 @@ var setCurrentAlbum = function(album) {
          albumSongList.innerHTML += createSongRow(i + 1, album.songs[i].title, album.songs[i].duration);
      }
  };
- 
+ // making a change
  window.onload = function() {
      setCurrentAlbum(albumMarconi);
      var albums = [albumPicasso, albumMarconi, albumModeselektor];
