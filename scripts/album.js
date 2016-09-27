@@ -51,7 +51,6 @@ var createSongRow = function(songNumber, songName, songLength) {
       + '  <td class="song-item-duration">' + songLength + '</td>'
       + '</tr>'
       ;
- 
      return template;
  };
 
@@ -62,24 +61,22 @@ var createSongRow = function(songNumber, songName, songLength) {
      var albumSongList = document.getElementsByClassName('album-view-song-list')[0];
 
 var setCurrentAlbum = function(album) {
- 
      albumTitle.firstChild.nodeValue = album.title;
      albumArtist.firstChild.nodeValue = album.artist;
      albumReleaseInfo.firstChild.nodeValue = album.year + ' ' + album.label;
      albumImage.setAttribute('src', album.albumArtUrl);
      albumSongList.innerHTML = '';
      for (var i = 0; i < album.songs.length; i++) {
+         console.log(album.songs.length);
          albumSongList.innerHTML += createSongRow(i + 1, album.songs[i].title, album.songs[i].duration);
      }
  };
 
 var songListContainer = document.getElementsByClassName('album-view-song-list')[0];
 var songRows = document.getElementsByClassName('album-view-song-item');
-
 var playButtonTemplate = '<a class="album-song-button"><span class="ion-play"></span></a>';
 
-// The following function is the one they want me to paste things into, and it doesn't look like 
-// the lessons says it does
+
 window.onload = function() {
      setCurrentAlbum(albumMarconi);
      var albums = [albumPicasso, albumMarconi, albumModeselektor];
@@ -89,13 +86,10 @@ window.onload = function() {
         index++;
         if (index == albums.length){
             index = 0;
-        }                 
+            }
     });
-};
-
 for (var i = 0; i < songRows.length; i++) {
          songRows[i].addEventListener('mouseleave', function(event) {
-             // Selects first child element, which is the song-item-number element
              this.children[0].innerHTML = this.children[0].getAttribute('data-song-number');
          });
      }
@@ -104,6 +98,5 @@ for (var i = 0; i < songRows.length; i++) {
 if (event.target.parentElement.className === 'album-view-song-item') {
     event.target.parentElement.querySelector('.song-item-number').innerHTML = playButtonTemplate;
          }
-         }
      });
-});
+}
