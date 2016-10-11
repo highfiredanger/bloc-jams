@@ -1,11 +1,12 @@
 function setSong(songNumber) {
     currentlyPlayingSongNumber = parseInt(songNumber);
     currentSongFromAlbum = currentAlbum.songs[songNumber - 1];
-};
+    //not sure why you had the console.log() thing in here.
+}
 
 function getSongNumberCell(number){
-    return $('.song-item-number[data-song-number="' + number + '"]');
-};
+    return $('.song-item-number[data-song-number="' + number + '"]'); 
+}
 
 var createSongRow = function(songNumber, songName, songLength) {
      var template =
@@ -18,11 +19,11 @@ var createSongRow = function(songNumber, songName, songLength) {
      var $row = $(template);
     
 var clickHandler = function() {
-	var songNumber = $(this).attr('data-song-number');
+	var songNumber = parseInt($(this).attr('data-song-number'));
 
 	if (currentlyPlayingSongNumber !== null) {
 		// Revert to song number for currently playing song because user started playing new song.
-		var currentlyPlayingCell = $('.song-item-number[data-song-number="' + currentlyPlayingSongNumber + '"]');
+		getSongNumberCell(currentlyPlayingSongNumber); 
 		currentlyPlayingCell.html(currentlyPlayingSongNumber);
 	}
 	if (currentlyPlayingSongNumber !== songNumber) {
@@ -41,7 +42,7 @@ var clickHandler = function() {
  
 var onHover = function(event) {
     var songNumberCell = $(this).find('.song-item-number');
-    var songNumber = songNumberCell.attr('data-song-number');
+    var songNumber = parseInt(songNumberCell.attr('data-song-number'));
     
     if (songNumber !== currentlyPlayingSongNumber) {
         songNumberCell.html(playButtonTemplate);
@@ -50,16 +51,15 @@ var onHover = function(event) {
                 
 var offHover = function(event) {
     var songNumberCell = $(this).find('.song-item-number');
-    var songNumber = songNumberCell.attr('data-song-number');
+    var songNumber = parseInt(songNumberCell.attr('data-song-number'));
     
-    if (songNumber !== currentlyPlayingSongNumber) {
+    if (songNumber !== currentlyPlayingSongNumber) { 
         songNumberCell.html(songNumber);
     }
 };
      
      $row.find('.song-item-number').click(clickHandler);
      $row.hover(onHover, offHover);
-     console.log("songNumber type is " + typeof songNumber + "\n and currentlyPlayingSongNumber type is " + typeof currentlyPlayingSongNumber);
      return $row;
 };
 
@@ -111,7 +111,7 @@ var $nextButton = $('.main-controls .next');
 var songNumber = parseInt($(this).attr('data-song-number'));
 
 $(document).ready(function() {
-setCurrentAlbum(albumPicasso)
+setCurrentAlbum(albumPicasso);
     $previousButton.click(previousSong);
     $nextButton.click(nextSong);
   });
@@ -140,7 +140,9 @@ var nextSong = function() {
     
     var lastSongNumber = getLastSongNumber(currentSongIndex);
     var $nextSongNumberCell = $('.song-item-number[data-song-number="' + currentlyPlayingSongNumber + '"]');
+    //use getSongNumberCell() here, pass in the correct variable to get the above code.
     var $lastSongNumberCell = $('.song-item-number[data-song-number="' + lastSongNumber + '"]');
+    //same here. Pass in the correct var thru getSongNumberCell().
     
     $nextSongNumberCell.html(pauseButtonTemplate);
     $lastSongNumberCell.html(lastSongNumber);  
@@ -172,6 +174,7 @@ var previousSong = function() {
     var lastSongNumber = getLastSongNumber(currentSongIndex);
     var $previousSongNumberCell = $('.song-item-number[data-song-number="' + currentlyPlayingSongNumber + '"]');
     var $lastSongNumberCell = $('.song-item-number[data-song-number="' + lastSongNumber + '"]');
+    // similar to above comments, use getSongNumberCell() with the respective variables.
     
     $previousSongNumberCell.html(pauseButtonTemplate);
     $lastSongNumberCell.html(lastSongNumber);
