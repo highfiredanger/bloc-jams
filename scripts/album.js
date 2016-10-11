@@ -1,7 +1,6 @@
 function setSong(songNumber) {
     currentlyPlayingSongNumber = parseInt(songNumber);
     currentSongFromAlbum = currentAlbum.songs[songNumber - 1];
-    //not sure why you had the console.log() thing in here.
 }
 
 function getSongNumberCell(number){
@@ -22,8 +21,8 @@ var clickHandler = function() {
 	var songNumber = parseInt($(this).attr('data-song-number'));
 
 	if (currentlyPlayingSongNumber !== null) {
-		// Revert to song number for currently playing song because user started playing new song.
-		getSongNumberCell(currentlyPlayingSongNumber); 
+		// Revert to song number for currently playing song because user started playing new song. 
+        var currentlyPlayingCell = getSongNumberCell(currentlyPlayingSongNumber);
 		currentlyPlayingCell.html(currentlyPlayingSongNumber);
 	}
 	if (currentlyPlayingSongNumber !== songNumber) {
